@@ -1,3 +1,5 @@
+import Ffmpeg from 'fluent-ffmpeg';
+
 declare module YoutubeMp3Downloader {
   export interface IYoutubeMp3DownloaderOptions {
     ffmpegPath?: string;
@@ -26,18 +28,18 @@ declare module YoutubeMp3Downloader {
       runtime: number;
       delta: number;
       speed: number;
-    }
+    };
   }
 }
 
 declare class YoutubeMp3Downloader {
-  constructor(options: YoutubeMp3Downloader.IYoutubeMp3DownloaderOptions)
+  constructor(options: YoutubeMp3Downloader.IYoutubeMp3DownloaderOptions);
 
   cleanFileName(fileName: string): string;
-  download(videoId: string, fileName?: string): void;
+  download(videoId: string, fileName?: string, buildProc: (proc: Ffmpeg.FfmpegCommand) => Ffmpeg.FfmpegCommand): void;
   performDownload(task, callback: (errorNessage?: string, output?: any) => void): void;
 
-  on(event: 'queueSize', listener: (total : number) => void): this;
+  on(event: 'queueSize', listener: (total: number) => void): this;
   on(event: 'error' | 'finished', listener: (err: any, data: any) => void): this;
   on(event: 'progress', listener: (video: YoutubeMp3Downloader.IVideoTask) => void): this;
 }
