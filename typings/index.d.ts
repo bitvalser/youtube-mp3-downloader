@@ -36,7 +36,7 @@ declare class YoutubeMp3Downloader {
   constructor(options: YoutubeMp3Downloader.IYoutubeMp3DownloaderOptions);
 
   cleanFileName(fileName: string): string;
-  download(videoId: string, fileName?: string, buildProc: (proc: Ffmpeg.FfmpegCommand) => Ffmpeg.FfmpegCommand): void;
+  download(videoId: string, fileName?: string, buildProc?: (proc: Ffmpeg.FfmpegCommand) => Ffmpeg.FfmpegCommand): void;
   performDownload(task, callback: (errorNessage?: string, output?: any) => void): void;
 
   on(event: 'queueSize', listener: (total: number) => void): this;
